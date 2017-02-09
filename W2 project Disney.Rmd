@@ -1,0 +1,35 @@
+---
+title: "Walt Disney World"
+author: "Mari Coonley"
+date: "February 8, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Walt Disney World
+
+HELLO WORLD! Today is Wednesday, February 8,2017. Brian, our beloved instructor was kind enough to show us where he works and Jeff's office is, so I decided to share where I work.  I live in Orlando, Florida, USA and I work at the most magical place in the world, Walt Disney World Resort.  I have created a map with markers to the primary resort location, the four theme parks as well as three popular destinations, including the location where I work, Disney Springs.  I have also included a link to the website specific to each geographic location.  My favorite park is EPCOT.  _Useless fun fact:_ EPCOT is an acronym for Experimental Protoype Community of Tomorrow.  So if you've never been to Walt Disney World in Florida, here's a quick overview for you, enjoy!  
+
+```{r properties, echo = FALSE, message = FALSE}
+library(leaflet)
+disIcon<-makeIcon(iconUrl =  "http://wondersofdisney.disneyfansites.com/clipart/logos/wdw/4parksmickhead.png", iconWidth = 31*215/230, iconHeight = 31, iconAnchorX=31*215/230/2, iconAnchorY = 16)
+disSites<-c("<a href='https://disneyworld.disney.go.com/'>Walt Disney World Resort</a>", 
+            "<a href='https://disneyworld.disney.go.com/destinations/magic-kingdom/' >The Magic Kingdom</a>", 
+            "<a href='https://disneyworld.disney.go.com/destinations/epcot/'>EPCOT</a>", 
+            "<a href='https://disneyworld.disney.go.com/destinations/hollywood-studios/'>Disney's Hollywood Studios</a>", 
+            "<a href='https://disneyworld.disney.go.com/destinations/animal-kingdom/'>Disney's Animal Kingdom<a/>",
+            "<a href='https://www.disneysprings.com/'>Disney Springs<a/>",
+            "<a href='https://disneyworld.disney.go.com/destinations/wide-world-of-sports/'>ESPN Wide World of Sports Complex</a>",
+            "<a href='https://disneyworld.disney.go.com/destinations/boardwalk/'>Disney's Boardwalk</a>")
+disn_prop<-data.frame(name = c("Walt Disney World Resort", "The Magic Kingdom", "EPCOT", "Disney's Hollywood Studios", "Disney's Animal Kingdom", "Disney Springs", "ESPN Wide World of Sports Complex", "Disney's Boardwalk"), lat = c(28.385233, 28.417663, 28.374694, 28.366505, 28.359719, 28.370256, 28.33811, 28.366505), 
+lng = c(-81.563874, -81.581212,-81.549404,-81.558271, -81.591313, -81.520992, -81.556384,-81.555921))
+disn_prop%>% 
+  leaflet()%>%
+  addTiles()%>%
+  addMarkers(icon=disIcon, popup=disSites, clusterOptions = markerClusterOptions())
+
+```
+
